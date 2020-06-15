@@ -1,0 +1,97 @@
+<section class="content-header">
+  <h1 *ngIf='pageTitle != ""' style="display: inline-block;">{{pageTitle}}</h1>
+
+  <div style="float: right;">
+    <button type="button" class="btn bg-gold btn-sm" (click)="listStudents()" style="margin-right: 5px;"><i
+        class="fa fa-list" style="margin-right: 5px;"></i> Student List</button>
+  </div>
+</section>
+
+<section class="content">
+  <div class="box box-top-border">
+
+    <form [formGroup]="tilawatForm" (ngSubmit)="onSubmit()">
+      <div class="box-body">
+        <div class="row">
+          <div class="col-md-6">
+
+            <!-- ============ Date ============ -->
+            <div class="form-group" [ngClass]="{ 'has-error': isSubmitted && f.date.errors }">
+              <label for="date">Date</label>
+              <input type="date" formControlName="date" class="form-control" id="date" />
+              <span *ngIf="isSubmitted && f.date.errors" class="help-block">
+                <div *ngIf="f.date.errors.required">Date is required</div>
+              </span>
+            </div>
+             <!-- ============ Student ============ -->
+             <div class="form-group" [ngClass]="{ 'has-error': isSubmitted && f.student.errors }">
+              <label for="student">Student</label>
+              <ng-select [items]="students" [allowClear]="true" style="width: 100%;" placeholder="Select Student"
+                formControlName="student"></ng-select>
+              <span *ngIf="isSubmitted && f.student.errors" class="help-block">
+                <div *ngIf="f.student.errors.required">Student is required.</div>
+              </span>
+            </div>
+            <!-- ============ Surat Name ============ -->
+            <div class="form-group" [ngClass]="{ 'has-error': isSubmitted && f.suratName.errors }">
+              <label for="suratName">Surat Name</label>
+              <ng-select [items]="suratNames" [allowClear]="true" style="width: 100%;" placeholder="Select Surat"
+                formControlName="suratName"></ng-select>
+              <span *ngIf="isSubmitted && f.suratName.errors" class="help-block">
+                <div *ngIf="f.suratName.errors.required">Surat Name is required.</div>
+              </span>
+            </div>
+           
+          </div>
+          <div class="col-md-6">
+   
+           <!-- ============ Start Ayat ============ -->
+           <div class="form-group" [ngClass]="{ 'has-error': isSubmitted && f.startAyat.errors }">
+            <label for="startAyat">Start Ayat</label>
+            <input type="text" formControlName="startAyat" class="form-control" id="startAyat"
+              placeholder="Start Ayat" />
+            <span *ngIf="isSubmitted && f.startAyat.errors" class="help-block">
+              <div *ngIf="f.startAyat.errors.required">Start Ayat is required</div>
+            </span>
+          </div>
+           <!-- ============ End Ayat ============ -->
+           <div class="form-group" [ngClass]="{ 'has-error': isSubmitted && f.endAyat.errors }">
+            <label for="endAyat">End Ayat</label>
+            <input type="text" formControlName="endAyat" class="form-control" id="endAyat"
+              placeholder="End Ayat" />
+            <span *ngIf="isSubmitted && f.endAyat.errors" class="help-block">
+              <div *ngIf="f.endAyat.errors.required">End Ayat is required</div>
+            </span>
+          </div>
+           <!-- ============ Juz Finished ============ -->
+           <div class="form-group"  [ngClass]="{ 'has-error': isSubmitted && f.juzFinished.errors }">
+             <label for="juzFinished"> Completed Juz ?</label>
+             <div style="margin-top: 7px; margin-left: -15px;">
+              <div class="radio" style="display: table-cell;">
+                <label style="margin: 0px 15px;">
+                  <input type="radio" name="juzFinished" formControlName="juzFinished" id="optionsRadios1" value=true>
+                 Yes
+                </label>
+              </div>
+              <div class="radio" style="display: table-cell;">
+                <label style="margin: 0px 15px;">
+                  <input type="radio" name="juzFinished" formControlName="juzFinished" id="optionsRadios2" value=false checked>
+                  No
+                </label>
+              </div>
+             </div>
+            
+          </div>
+          </div>
+        </div>
+      </div>
+      <div class="box-footer" style="text-align: center;">
+        <button type="button" (click)="onReset()" class="btn btn-primary" style="margin-right: 5px;">
+          <i class="fa fa-refresh" style="margin-right: 4px;"></i>Reset </button>
+        <button type="submit" class="btn btn-success" [disabled]="disableSubmit">
+          <i class="fa fa-send" style="margin-right: 4px;"></i>Submit</button>
+      </div>
+    </form>
+
+  </div>
+</section>

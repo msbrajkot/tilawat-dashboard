@@ -1,0 +1,125 @@
+<section class="content-header">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 style="margin-top: 10px;">
+        Dashboard
+      </h2>
+    </div>
+  </div>
+  <div class="row" >
+    <div class="col-md-6 col-xs-12">
+
+      <div class="form-group">
+        <label style="display: inline-block; padding-right: 5px;">Report Type : </label>
+        <ng-select id="reportType" [items]="reportTypes" style="width: 75%; display: inline-block;" placeholder="Select Report Type" [(ngModel)]="report" >
+        </ng-select>
+      </div>
+    </div>
+    <div class="col-md-6 col-xs-12" *ngIf="report!=null && report[0].text=='Individual Report'">
+
+      <div class="form-group">
+        <label style="display:inline-block; padding-right: 30px;"> Student :</label>
+        <ng-select [items]="studentsList" style="width: 75%; display: inline-block;" placeholder="Select Student" (selected)="updateStudentReport($event)">
+        </ng-select>
+      </div>
+    </div>
+  </div>
+
+</section>
+<hr class="section-title-line">
+<section class="content">
+  <!-- Blocks Count -->
+  <div class="row" *ngIf="report!=null">
+    <div class="box-header" *ngIf="report!=null">
+      <h3 class="box-title section-title">{{report[0].text}}</h3>
+    </div>
+    <div class="col-lg-3 col-xs-6">
+      <!-- small box -->
+      <div class="small-box" style="background-color: #9b8e20 ;color: white;">
+        <div class="inner">
+          <h3 *ngIf="juzCountOverall!=null && report[0].text=='Overall Report'">{{juzCountOverall}}</h3>
+          <h3 *ngIf="juzCountIndividual!=null && report[0].text=='Individual Report'">{{juzCountIndividual}}</h3>
+
+          <p>Juz Count</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-ios-bookmarks"></i>
+        </div>
+        <!-- <a class="small-box-footer" href="#">More info <i class="fa fa-arrow-circle-right"></i></a> -->
+      </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-xs-6">
+      <!-- small box -->
+      <div class="small-box" style="background-color:#4CAF50; color: white;">
+        <div class="inner">
+          <h3 *ngIf="ayatCountOverall!=null && report[0].text=='Overall Report'">{{ayatCountOverall}}</h3>
+          <h3 *ngIf="ayatCountIndividual!=null &&report[0].text=='Individual Report'">{{ayatCountIndividual}}</h3>
+          <p>Total Ayat Count</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-ios-paper"></i>
+        </div>
+        <!-- <a class="small-box-footer" href="#">More info <i class="fa fa-arrow-circle-right"></i></a> -->
+      </div>
+    </div>
+  </div>
+<!-- Individual Charts -->
+  <div class="row" *ngIf="report!=null && report[0].text=='Individual Report'">
+    <div class="col-md-12">
+      <div class="box box-top-border">
+        <div class="box-header ui-sortable-handle" style="cursor: move;">
+          <i class="ion ion-stats-bars"></i>
+
+          <h3 class="box-title">Day Wise Report</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body" *ngIf="selectedStudent!=null">
+          <!-- <div class="chart-container" style="position: relative; height:40vh; width:70vw">     -->
+            <canvas baseChart
+            [datasets]="dayWiseChartData"
+            [labels]="dayWiseChartLabels"
+            [options]="dayWiseChartOptions"
+            [plugins]="dayWiseChartPlugins"
+            [legend]="dayWiseChartLegend"
+            [chartType]="dayWiseChartType">
+          </canvas>
+          <!-- </div> -->
+        </div>
+        <!-- /.box-body -->
+      
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Individual Charts -->
+  <div class="row" *ngIf="report!=null && report[0].text=='Overall Report'">
+    <div class="col-md-12">
+      <div class="box box-top-border">
+        <div class="box-header ui-sortable-handle" style="cursor: move;">
+          <i class="ion ion-stats-bars"></i>
+
+          <h3 class="box-title">Student Wise Juz Report</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <!-- <div class="chart-container" style="position: relative; height:40vh; width:70vw">     -->
+            <canvas baseChart
+            [datasets]="studentWiseJuzChartData"
+            [labels]="studentWiseJuzChartLabels"
+            [options]="studentWiseJuzChartOptions"
+            [plugins]="studentWiseJuzChartPlugins"
+            [legend]="studentWiseJuzChartLegend"
+            [chartType]="studentWiseJuzChartType">
+          </canvas>
+          <!-- </div> -->
+        </div>
+        <!-- /.box-body -->
+      
+      </div>
+    </div>
+
+  </div>
+
+</section>
