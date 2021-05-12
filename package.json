@@ -22,7 +22,7 @@
     "@sweetalert2/ngx-sweetalert2": "^5.1.0",
     "@types/lodash": "^4.14.155",
     "angular-datatables": "^9.0.2",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "chartjs-plugin-datalabels": "^0.7.0",
     "core-js": "^2.5.4",
     "datatables.net": "^1.10.20",
